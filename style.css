@@ -26,7 +26,7 @@ body {
   100% { transform: scale(1.08) translate(-15px, 10px); opacity: 1; }
 }
 
-/* Сейсмические волны Тоф (Seismic Sense) из центра */
+/* Seismic Sense*/
 .seismic-overlay {
   position: fixed;
   inset: 0;
@@ -43,7 +43,7 @@ body {
   animation: seismicTotalDarkness 1.4s ease-out forwards;
 }
 
-/* Кольца вибрации, расходящиеся из центра */
+/*vibration rings*/
 .seismic-overlay::before,
 .seismic-overlay::after {
   content: '';
@@ -64,7 +64,7 @@ body {
 
 @keyframes seismicTotalDarkness {
   0% {
-    background: rgba(2, 4, 3, 0.96); /* Полная темная ночь земной коры */
+    background: rgba(2, 4, 3, 0.96); /* night sfx */
     opacity: 1;
   }
   75% {
