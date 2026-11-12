@@ -37,7 +37,7 @@ function playStoneSound() {
   } catch (e) {}
 }
 
-// Глубокий резонирующий гул сейсмической волны
+// mp3 effect of vibration stuff
 function playSeismicSenseSound() {
   try {
     initAudio();
