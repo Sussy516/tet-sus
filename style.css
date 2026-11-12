@@ -1,0 +1,195 @@
+body {
+  background: radial-gradient(circle at center, #1b2824 0%, #0d1311 100%);
+  color: #a8d5ba;
+  font-family: 'Courier New', Courier, monospace;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+  overflow: hidden;
+  position: relative;
+}
+
+.fog-layer {
+  position: absolute;
+  inset: 0;
+  background: 
+    radial-gradient(circle at 20% 80%, rgba(74, 124, 89, 0.15), transparent 50%),
+    radial-gradient(circle at 80% 20%, rgba(168, 213, 186, 0.08), transparent 50%);
+  animation: fogDrift 12s ease-in-out infinite alternate;
+  pointer-events: none;
+}
+
+@keyframes fogDrift {
+  0% { transform: scale(1) translate(0, 0); opacity: 0.7; }
+  100% { transform: scale(1.08) translate(-15px, 10px); opacity: 1; }
+}
+
+/* Сейсмические волны Тоф (Seismic Sense) из центра */
+.seismic-overlay {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 100;
+  background: rgba(0, 0, 0, 0);
+  opacity: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.seismic-active {
+  animation: seismicTotalDarkness 1.4s ease-out forwards;
+}
+
+/* Кольца вибрации, расходящиеся из центра */
+.seismic-overlay::before,
+.seismic-overlay::after {
+  content: '';
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  border: 3px solid rgba(255, 255, 255, 0);
+  border-radius: 50%;
+}
+
+.seismic-active::before {
+  animation: seismicWaveRing 1.2s cubic-bezier(0, 0.5, 0.5, 1) forwards;
+}
+
+.seismic-active::after {
+  animation: seismicWaveRing 1.2s cubic-bezier(0, 0.5, 0.5, 1) 0.25s forwards;
+}
+
+@keyframes seismicTotalDarkness {
+  0% {
+    background: rgba(2, 4, 3, 0.96); /* Полная темная ночь земной коры */
+    opacity: 1;
+  }
+  75% {
+    background: rgba(11, 16, 14, 0.85);
+    opacity: 1;
+  }
+  100% {
+    background: rgba(0, 0, 0, 0);
+    opacity: 0;
+  }
+}
+
+@keyframes seismicWaveRing {
+  0% {
+    width: 20px;
+    height: 20px;
+    border: 5px solid rgba(255, 255, 255, 0.95);
+    box-shadow: 0 0 25px rgba(116, 198, 157, 0.8), inset 0 0 15px rgba(255, 255, 255, 0.9);
+    opacity: 1;
+  }
+  100% {
+    width: 1400px;
+    height: 1400px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    box-shadow: 0 0 50px rgba(116, 198, 157, 0), inset 0 0 0 rgba(255, 255, 255, 0);
+    opacity: 0;
+  }
+}
+
+.game-wrapper {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: rgba(18, 26, 23, 0.85);
+  padding: 24px;
+  border: 3px solid #3a4f41;
+  border-radius: 6px;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.7), inset 0 0 20px rgba(82, 183, 136, 0.08);
+}
+
+header {
+  text-align: center;
+  margin-bottom: 18px;
+}
+
+h1 {
+  margin: 0;
+  font-size: 28px;
+  letter-spacing: 4px;
+  color: #74c69d;
+  text-shadow: 0 2px 10px rgba(116, 198, 157, 0.3);
+}
+
+.subtitle {
+  margin: 6px 0 0;
+  font-size: 12px;
+  color: #7a9386;
+  letter-spacing: 1px;
+}
+
+.game-container {
+  display: flex;
+  gap: 20px;
+  align-items: flex-start;
+}
+
+canvas {
+  border: 4px solid #2d3b32;
+  background: #0b100e;
+  box-shadow: inset 0 0 25px rgba(0, 0, 0, 0.9), 0 0 15px rgba(82, 183, 136, 0.12);
+  border-radius: 2px;
+}
+
+#nextPiece {
+  background: #0b100e;
+  border: 2px solid #2d3b32;
+  margin-top: 4px;
+}
+
+.info-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 145px;
+}
+
+.stat-box {
+  background: rgba(27, 40, 34, 0.9);
+  border: 2px solid #3a4f41;
+  padding: 10px;
+  border-radius: 4px;
+  text-align: center;
+}
+
+.stat-box h3 {
+  margin: 0 0 6px 0;
+  font-size: 11px;
+  color: #7a9386;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+#score {
+  font-size: 22px;
+  font-weight: bold;
+  color: #95d5b2;
+  text-shadow: 0 0 8px rgba(116, 198, 157, 0.4);
+}
+
+.controls-hint {
+  font-size: 11px;
+  color: #8ba396;
+  background: rgba(22, 33, 28, 0.7);
+  padding: 10px;
+  border-radius: 4px;
+  border: 1px solid #2d3b32;
+}
+
+.controls-hint h4 {
+  margin: 0 0 6px 0;
+  color: #74c69d;
+}
+
+.controls-hint p {
+  margin: 3px 0;
+}

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Tet-sus: Earth Kingdom</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="fog-layer"></div>
+  <div class="seismic-overlay" id="seismicOverlay"></div>
+
+  <div class="game-wrapper">
+    <header>
+      <h1>TET-SUS</h1>
+      <p class="subtitle">Earth Kingdom • Seismic Sense</p>
+    </header>
+    
+    <div class="game-container">
+      <canvas id="tetris" width="240" height="400"></canvas>
+      
+      <div class="info-panel">
+        <div class="stat-box">
+          <h3>Next Block</h3>
+          <canvas id="nextPiece" width="80" height="80"></canvas>
+        </div>
+
+        <div class="stat-box">
+          <h3>Harmony Score</h3>
+          <span id="score">0</span>
+        </div>
+
+        <div class="controls-hint">
+          <h4>Controls:</h4>
+          <p>← → : Move</p>
+          <p>↓ : Soft Drop</p>
+          <p>Q / E : Rotate</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>
