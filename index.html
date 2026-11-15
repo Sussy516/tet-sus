@@ -2,42 +2,97 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Tet-sus: Earth Kingdom</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div class="fog-layer"></div>
-  <div class="seismic-overlay" id="seismicOverlay"></div>
+  <div class="fog-layer" aria-hidden="true"></div>
+  <div class="seismic-overlay" id="seismicOverlay" aria-hidden="true"></div>
 
-  <div class="game-wrapper">
-    <header>
+  <div class="page-shell">
+    <header class="site-header">
       <h1>TET-SUS</h1>
-      <p class="subtitle">Earth Kingdom • Seismic Sense</p>
+      <p class="subtitle">Earth Kingdom &bull; Seismic Sense</p>
     </header>
-    
-    <div class="game-container">
-      <canvas id="tetris" width="240" height="400"></canvas>
-      
-      <div class="info-panel">
-        <div class="stat-box">
-          <h3>Next Block</h3>
-          <canvas id="nextPiece" width="80" height="80"></canvas>
+
+    <main class="game-wrapper">
+      <div class="game-container">
+        <div class="board-stage">
+          <canvas
+            id="tetris"
+            width="240"
+            height="400"
+            role="img"
+            aria-label="Tet-sus game board"
+          ></canvas>
+          <div class="pause-banner" id="pauseBanner" hidden>PAUSED</div>
         </div>
 
-        <div class="stat-box">
-          <h3>Harmony Score</h3>
-          <span id="score">0</span>
-        </div>
+        <aside class="info-panel" aria-label="Game status and controls">
+          <div class="stat-box">
+            <h2>Next Block</h2>
+            <canvas
+              id="nextPiece"
+              width="80"
+              height="80"
+              role="img"
+              aria-label="Next Tetris piece preview"
+            ></canvas>
+          </div>
 
-        <div class="controls-hint">
-          <h4>Controls:</h4>
-          <p>← → : Move</p>
-          <p>↓ : Soft Drop</p>
-          <p>Q / E : Rotate</p>
-        </div>
+          <div class="stat-box">
+            <h2>Harmony Score</h2>
+            <span id="score" class="stat-value">0</span>
+          </div>
+
+          <div class="stat-box stat-grid">
+            <div>
+              <h2>Best</h2>
+              <span id="bestScore" class="stat-subvalue">0</span>
+            </div>
+            <div>
+              <h2>Level</h2>
+              <span id="level" class="stat-subvalue">1</span>
+            </div>
+            <div>
+              <h2>Lines</h2>
+              <span id="lines" class="stat-subvalue">0</span>
+            </div>
+          </div>
+
+          <div class="action-buttons">
+            <button type="button" id="pauseBtn" class="ctrl-btn">Pause</button>
+            <button type="button" id="muteBtn" class="ctrl-btn" aria-pressed="false">Mute Audio</button>
+            <button type="button" id="restartBtn" class="ctrl-btn">Restart</button>
+          </div>
+
+          <section class="controls-hint" aria-labelledby="controls-heading">
+            <h2 id="controls-heading">Controls</h2>
+            <ul class="controls-list">
+              <li><kbd>&larr;</kbd> <kbd>&rarr;</kbd> : Move</li>
+              <li><kbd>&darr;</kbd> : Soft Drop</li>
+              <li><kbd>Space</kbd> : Hard Drop</li>
+              <li><kbd>Q</kbd> / <kbd>E</kbd> : Rotate</li>
+              <li><kbd>P</kbd> : Pause &bull; <kbd>M</kbd> : Mute</li>
+            </ul>
+          </section>
+        </aside>
       </div>
-    </div>
+
+      <div class="touch-controls" role="group" aria-label="Touch game controls">
+        <button type="button" class="touch-btn" data-action="left" aria-label="Move left">&larr;</button>
+        <button type="button" class="touch-btn" data-action="rotate-left" aria-label="Rotate left">&#8634;</button>
+        <button type="button" class="touch-btn" data-action="down" aria-label="Soft drop">&darr;</button>
+        <button type="button" class="touch-btn" data-action="hard-drop" aria-label="Hard drop">Drop</button>
+        <button type="button" class="touch-btn" data-action="rotate-right" aria-label="Rotate right">&#8635;</button>
+        <button type="button" class="touch-btn" data-action="right" aria-label="Move right">&rarr;</button>
+      </div>
+
+      <p id="statusAnnouncer" class="visually-hidden" aria-live="polite"></p>
+    </main>
   </div>
+
   <script src="script.js"></script>
 </body>
 </html>
