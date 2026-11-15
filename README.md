@@ -1,16 +1,21 @@
 # TET-SUS
 
-A cozy voxel-style Tetris game inspired by the show Avatar: the last airbender(2 book= Earth Kingdom vibe)
-
-Pure HTML and JS were used.
+A cozy voxel-style Tetris game inspired by *Avatar: The Last Airbender* (Book 2: Earth Kingdom). Built with pure HTML, CSS, Canvas, and Web Audio API.
 
 ## Controls
-* **Left / Right Arrows** — Move block
-* **Down Arrow** — Soft drop
-* **Q / E** — Rotate block
+- **&larr; / &rarr;** — Move block
+- **&darr;** — Soft drop
+- **Space** — Hard drop
+- **Q / E** — Rotate block
+- **P** — Pause / Resume
+- **M** — Mute / Unmute audio
+- **R** — Restart game
 
 ## Features
-* **Seismic Sense:** A special vibration pulses (the ones that toph used) across the screen every 1,000 points!
-* **100% Offline:** Works without internet, with built-in retro sound effects.
+- **Seismic Sense:** Vibration wave pulse and low-frequency tone every 1,000 points.
+- **Ghost Piece & Level Scaling:** Landing preview and progressive drop speed per 10 cleared lines.
+- **Persistent Best Score:** High scores saved locally via `localStorage`.
+- **Accessible & Mobile-Ready:** On-screen touch controls, keyboard navigation, and `prefers-reduced-motion` support.
+- **100% Offline:** Works without internet, with synthesized Web Audio sound effects.
 
-build with seismic love by [Nurmogg](https://github.com/Sussy516)🍀
+Built with seismic love by [NurMogg](https://github.com/Sussy516).
