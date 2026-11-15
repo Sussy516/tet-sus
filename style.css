@@ -1,3 +1,9 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
 body {
   background: radial-gradient(circle at center, #1b2824 0%, #0d1311 100%);
   color: #a8d5ba;
@@ -5,20 +11,38 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  min-height: 100dvh;
   margin: 0;
-  overflow: hidden;
+  padding: 16px;
   position: relative;
 }
 
+.visually-hidden:where(:not(:focus-within, :active)) {
+  position: absolute !important;
+  clip-path: inset(50%) !important;
+  overflow: hidden !important;
+  width: 1px !important;
+  height: 1px !important;
+  margin: -1px !important;
+  padding: 0 !important;
+  border: 0 !important;
+  white-space: nowrap !important;
+}
+
 .fog-layer {
-  position: absolute;
+  position: fixed;
   inset: 0;
-  background: 
+  background:
     radial-gradient(circle at 20% 80%, rgba(74, 124, 89, 0.15), transparent 50%),
     radial-gradient(circle at 80% 20%, rgba(168, 213, 186, 0.08), transparent 50%);
-  animation: fogDrift 12s ease-in-out infinite alternate;
+  opacity: 0.85;
   pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .fog-layer {
+    animation: fogDrift 12s ease-in-out infinite alternate;
+  }
 }
 
 @keyframes fogDrift {
@@ -26,7 +50,7 @@ body {
   100% { transform: scale(1.08) translate(-15px, 10px); opacity: 1; }
 }
 
-/* Seismic Sense*/
+/* Seismic Sense */
 .seismic-overlay {
   position: fixed;
   inset: 0;
@@ -39,11 +63,6 @@ body {
   align-items: center;
 }
 
-.seismic-active {
-  animation: seismicTotalDarkness 1.4s ease-out forwards;
-}
-
-/*vibration rings*/
 .seismic-overlay::before,
 .seismic-overlay::after {
   content: '';
@@ -54,17 +73,23 @@ body {
   border-radius: 50%;
 }
 
-.seismic-active::before {
-  animation: seismicWaveRing 1.2s cubic-bezier(0, 0.5, 0.5, 1) forwards;
-}
+@media (prefers-reduced-motion: no-preference) {
+  .seismic-active {
+    animation: seismicTotalDarkness 1.4s ease-out forwards;
+  }
 
-.seismic-active::after {
-  animation: seismicWaveRing 1.2s cubic-bezier(0, 0.5, 0.5, 1) 0.25s forwards;
+  .seismic-active::before {
+    animation: seismicWaveRing 1.2s cubic-bezier(0, 0.5, 0.5, 1) forwards;
+  }
+
+  .seismic-active::after {
+    animation: seismicWaveRing 1.2s cubic-bezier(0, 0.5, 0.5, 1) 0.25s forwards;
+  }
 }
 
 @keyframes seismicTotalDarkness {
   0% {
-    background: rgba(2, 4, 3, 0.96); /* night sfx */
+    background: rgba(2, 4, 3, 0.96);
     opacity: 1;
   }
   75% {
@@ -94,22 +119,23 @@ body {
   }
 }
 
-.game-wrapper {
+.page-shell {
   position: relative;
   z-index: 1;
   display: flex;
   flex-direction: column;
   align-items: center;
-  background: rgba(18, 26, 23, 0.85);
-  padding: 24px;
+  background: rgba(18, 26, 23, 0.88);
+  padding: 20px 24px;
   border: 3px solid #3a4f41;
   border-radius: 6px;
   box-shadow: 0 15px 40px rgba(0, 0, 0, 0.7), inset 0 0 20px rgba(82, 183, 136, 0.08);
+  max-width: 100%;
 }
 
-header {
+.site-header {
   text-align: center;
-  margin-bottom: 18px;
+  margin-bottom: 16px;
 }
 
 h1 {
@@ -123,8 +149,15 @@ h1 {
 .subtitle {
   margin: 6px 0 0;
   font-size: 12px;
-  color: #7a9386;
+  color: #8eb39e;
   letter-spacing: 1px;
+}
+
+.game-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
 }
 
 .game-container {
@@ -133,7 +166,29 @@ h1 {
   align-items: flex-start;
 }
 
+.board-stage {
+  position: relative;
+}
+
+.pause-banner {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  background: rgba(11, 16, 14, 0.82);
+  color: #95d5b2;
+  font-size: 22px;
+  font-weight: bold;
+  letter-spacing: 4px;
+  border: 2px solid #52b788;
+}
+
+.pause-banner[hidden] {
+  display: none;
+}
+
 canvas {
+  display: block;
   border: 4px solid #2d3b32;
   background: #0b100e;
   box-shadow: inset 0 0 25px rgba(0, 0, 0, 0.9), 0 0 15px rgba(82, 183, 136, 0.12);
@@ -143,53 +198,145 @@ canvas {
 #nextPiece {
   background: #0b100e;
   border: 2px solid #2d3b32;
-  margin-top: 4px;
+  margin: 4px auto 0;
 }
 
 .info-panel {
   display: flex;
   flex-direction: column;
-  gap: 12px;
-  width: 145px;
+  gap: 10px;
+  width: 170px;
 }
 
 .stat-box {
   background: rgba(27, 40, 34, 0.9);
   border: 2px solid #3a4f41;
-  padding: 10px;
+  padding: 8px 10px;
   border-radius: 4px;
   text-align: center;
 }
 
-.stat-box h3 {
+.stat-box h2,
+.controls-hint h2 {
   margin: 0 0 6px 0;
   font-size: 11px;
-  color: #7a9386;
+  color: #9dc2ae;
   text-transform: uppercase;
   letter-spacing: 1px;
 }
 
-#score {
+.stat-value {
   font-size: 22px;
   font-weight: bold;
   color: #95d5b2;
   text-shadow: 0 0 8px rgba(116, 198, 157, 0.4);
 }
 
+.stat-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 6px;
+}
+
+.stat-subvalue {
+  font-size: 15px;
+  font-weight: bold;
+  color: #d8f3dc;
+}
+
+.action-buttons {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 6px;
+}
+
+.ctrl-btn,
+.touch-btn {
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: bold;
+  color: #d8f3dc;
+  background: #1b3126;
+  border: 2px solid #406852;
+  border-radius: 4px;
+  min-inline-size: 36px;
+  min-block-size: 32px;
+  padding: 6px 10px;
+  cursor: pointer;
+  touch-action: manipulation;
+  transition: background-color 0.15s ease, border-color 0.15s ease;
+}
+
+.ctrl-btn:hover,
+.touch-btn:hover {
+  background: #274837;
+  border-color: #74c69d;
+}
+
+.ctrl-btn[aria-pressed='true'] {
+  background: #402624;
+  border-color: #c98a82;
+  color: #f4d8d4;
+}
+
+:where(button):focus-visible {
+  outline: 3px solid #95d5b2;
+  outline-offset: 2px;
+}
+
 .controls-hint {
   font-size: 11px;
-  color: #8ba396;
-  background: rgba(22, 33, 28, 0.7);
+  color: #9dc2ae;
+  background: rgba(22, 33, 28, 0.75);
   padding: 10px;
   border-radius: 4px;
   border: 1px solid #2d3b32;
 }
 
-.controls-hint h4 {
-  margin: 0 0 6px 0;
+.controls-hint h2 {
   color: #74c69d;
 }
 
-.controls-hint p {
-  margin: 3px 0;
+.controls-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.controls-list kbd {
+  background: #0b100e;
+  border: 1px solid #3a4f41;
+  border-radius: 3px;
+  padding: 1px 4px;
+  font-size: 10px;
+  color: #d8f3dc;
+}
+
+.touch-controls {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+}
+
+@media (pointer: coarse) {
+  .ctrl-btn,
+  .touch-btn {
+    min-inline-size: 44px;
+    min-block-size: 44px;
+  }
+}
+
+@media (max-width: 520px) {
+  .game-container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .info-panel {
+    width: 240px;
+  }
 }
