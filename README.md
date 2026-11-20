@@ -18,4 +18,4 @@ A cozy voxel-style Tetris game inspired by *Avatar: The Last Airbender* (Book 2:
 - **Accessible & Mobile-Ready:** On-screen touch controls, keyboard navigation, and `prefers-reduced-motion` support.
 - **100% Offline:** Works without internet, with synthesized Web Audio sound effects.
 
-Built with seismic love by [NurMogg](https://github.com/Sussy516).
+Built with seismic sense and love by [NurMogg](https://github.com/Sussy516).
