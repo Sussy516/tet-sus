@@ -474,3 +474,18 @@ document.querySelectorAll('.touch-btn').forEach(btn => {
 playerReset();
 updateHUD();
 update();
+//
+
+document.querySelectorAll('.touch-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const action = btn.dataset.action;
+    if (action === 'left') playerMove(-1);
+    else if (action === 'right') playerMove(1);
+    else if (action === 'down') playerDrop();
+    else if (action === 'hard-drop') playerHardDrop();
+    else if (action === 'rotate-left') playerRotate(-1);
+    else if (action === 'rotate-right') playerRotate(1);
+  });
+});
+
+// Tetsus engine initialized: 12x20 grid, WebAudio synth & localStorage persistence active.
